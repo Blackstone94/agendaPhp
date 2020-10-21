@@ -1,0 +1,81 @@
+/*Custom property*/
+:root{
+    --primario: #C2185B;
+    --secundario: #FFC107;
+    --primarioObscuro: rgb(156,18,69);
+    --fuentePrimaria: Arial,Helvetica,sans-serif;
+    --fuenteSecundaria: font-family: 'Poppins', sans-serif;
+
+}
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+    box-sizing: border-box;
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+  body{
+    background-color: var(--primario);
+    font-family: var(--fuentePrimaria);
+  }
+  h1,h2{
+      font-family: var(--fuentePrimaria);
+      margin: 0;
+      text-align: center;
+  }
+  h1{
+      color: white;
+      padding: 20px;
+  }
+  .contenedor-barra{
+      background-color: var(--primarioObscuro);
+
+  }
+  .contenedor{
+    max-width: 1100px;
+    margin: 0 auto;
+}
+  .bg-amarillo{
+    background-color: var(--secundario);
+  }
+  .sombra{
+    -webkit-box-shadow: 0px 3px 5px 1px rgba(0,0,0,0.73);
+    -moz-box-shadow: 0px 3px 5px 1px rgba(0,0,0,0.73);
+    box-shadow: 0px 3px 5px 1px rgba(0,0,0,0.73);
+  }
+  form{
+      padding: 3rem;
+      margin-top: 2rem;
+  }
+  form legend{
+      margin: 0 auto; 
+      font-size: 2rem;
+      font-family: var(--fuenteSecundaria);
+      text-align: center;
+}
+legend span{
+    font-size: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    clear: both;
+    display: block;
+}
+@media (min-width:768px){
+    .campos{
+        display: flex;
+        justify-content: center;
+    }
+    .campo{
+        flex: 0 0 calc( 33.33% - 1rem );
+    }
+}
+.campos{
+    padding: .5rem 0;
+}
+.campos label{
+    font-size: 1.2rem;
+}
+.campo input[type="text"],
+.campo input[type="tel"]{
+    width: 100%;
+}
