@@ -8,6 +8,7 @@
   <div class="bg-amarillo contenedor sombra">
       <form id="contacto" action="#">
             <legend>Edite el contacto <span></span></legend>
+            <?php   include 'includes/layout/formulario.php'; ?>
       </form>
   </div>
 <?php   include 'includes/layout/footer.php'; ?>
