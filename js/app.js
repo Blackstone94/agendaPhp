@@ -47,6 +47,20 @@ function insertarBD(datos){
         if(this.status==200){
             console.log(xhr.responseText);
             const respuesta=JSON.parse(xhr.responseText);
+
+            const nuevoContacto =document.createElement('tr');
+            nuevoContacto.innerHTML = ` 
+                <td>${respuesta.datos.nombre}</td> 
+                <td>${respuesta.datos.empresa}</td>  
+                <td>${respuesta.datos.telefono}</td> `;
+            //crear el icono editar
+            const iconoEditar = document.createElement('i');
+            iconoEditar.classList.add('fas','fa-pen-square');
+            //crear el enlace editar
+            const btnEditar = document.createElement('a');
+            btnEditar.appendChild(iconoEditar);
+            btnEditar.href = `editar`;
+
             
         }
     }
