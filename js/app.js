@@ -10,15 +10,63 @@ function validarFormulario(e){
     console.log("presionado..");
     const nombre= document.querySelector('#nombre').value,
           empresa=document.querySelector('#empresa').value,
-          telefono=document.querySelector('#tel').value;
-    if(nombre===''){
-        console.log('nombre vacio');
+          telefono=document.querySelector('#tel').value,
+          accion=document.querySelector('#accion').value;
+    if(nombre==='' || empresa==='' || telefono===''){
+        mostrarNotificacion('error','Todos los campos son obligatorios');
     }
-    if(empresa===''){
-        console.log('empresa vacia');
-    }
-    if(telefono===''){
-        console.log('telefono vacio');
-    }
+    else{
+        //paso la validacion, convertir datos a objeto ajax
+        const infoContacto= new FormData();
+        infoContacto.append('nombre',nombre);
+        infoContacto.append('empresa',empresa);
+        infoContacto.append('telefono',telefono);
+        infoContacto.append('accion',accion);
 
+        if(accion==='crear'){
+            //crear un nuevo contacto
+            insertarBD(infoContacto);
+        }else{
+            //editar un contacto
+
+        }
+        mostrarNotificacion('correcto','ok');
+    }
+}
+/*insertar a la base de datos via ajax */
+function insertarBD(datos){
+    //llamado a ajax
+
+    //crear el objeto
+    const xhr=new XMLHttpRequest();
+
+    //abrir la conexion
+    xhr.open('POST','includes/modelos/modelo-contactos.php',true);
+    //pasar los datos
+    xhr.onload =function (){
+        if(this.status==200){
+            console.log(xhr.responseText);
+            const respuesta=JSON.parse(xhr.responseText);
+            
+        }
+    }
+    //enviar los datos
+    xhr.send(datos);
+    
+}
+function mostrarNotificacion(clase,mensaje){
+    const notificacion=document.createElement('div');
+    notificacion.classList.add(clase,'notificacion','sombra');
+    notificacion.textContent=mensaje;
+
+    formularioContactos.insertBefore(notificacion,document.querySelector('form legend'));
+    setTimeout(()=> {
+        notificacion.classList.add('visible');
+        setTimeout(()=> {
+            notificacion.classList.remove('visible');
+            setTimeout(()=>{
+                notificacion.remove();
+            },500);
+        },3000);
+    },100);
 }
