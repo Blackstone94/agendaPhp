@@ -1,5 +1,5 @@
 const formularioContactos = document.querySelector('#contacto');
-
+const listadoContactos = document.querySelector('#listado-contactos');
 addEventListener();
 
 function addEventListener(){
@@ -30,7 +30,6 @@ function validarFormulario(e){
             //editar un contacto
 
         }
-        mostrarNotificacion('correcto','ok');
     }
 }
 /*insertar a la base de datos via ajax */
@@ -53,15 +52,42 @@ function insertarBD(datos){
                 <td>${respuesta.datos.nombre}</td> 
                 <td>${respuesta.datos.empresa}</td>  
                 <td>${respuesta.datos.telefono}</td> `;
+
+            const contenedorAcciones=document.createElement('td');
+
             //crear el icono editar
             const iconoEditar = document.createElement('i');
             iconoEditar.classList.add('fas','fa-pen-square');
             //crear el enlace editar
             const btnEditar = document.createElement('a');
             btnEditar.appendChild(iconoEditar);
-            btnEditar.href = `editar`;
-
+            btnEditar.href = `editar.php=?id=${respuesta.datos.id}`;
+            btnEditar.classList.add('btn','btn-editar');
             
+            //agregarlo al padre
+            contenedorAcciones.appendChild(btnEditar);
+
+            //crear el icono de eliminar
+            const iconoEliminar=document.createElement('i');
+            iconoEliminar.classList.add('fas','fa-trash-alt');
+
+            //crear el boton eliminar
+            const btnEliminar=document.createElement('button');
+            btnEliminar.appendChild(iconoEliminar);
+            btnEliminar.setAttribute('data-id',respuesta.datos.id);
+            btnEliminar.classList.add('btn','btn-borrar');
+            
+            //se agregar al padre
+            contenedorAcciones.appendChild(btnEliminar);
+            //agregarlo al tr
+            nuevoContacto.appendChild(contenedorAcciones);
+            //agregarlo a los contactos
+            listadoContactos.appendChild(nuevoContacto);
+
+            //mostrar notificacion
+            mostrarNotificacion('correcto','contacto creado correctamente');
+
+            document.querySelector('form').reset();
         }
     }
     //enviar los datos
