@@ -1,9 +1,10 @@
 const formularioContactos = document.querySelector('#contacto');
-const listadoContactos = document.querySelector('#listado-contactos');
+const listadoContactos = document.querySelector('#listado-contactos tbody');
 addEventListener();
 
 function addEventListener(){
     formularioContactos.addEventListener('submit',validarFormulario);
+    listadoContactos.addEventListener('click',eliminarContacto);
 }
 function validarFormulario(e){
     e.preventDefault();
@@ -93,6 +94,27 @@ function insertarBD(datos){
     //enviar los datos
     xhr.send(datos);
     
+}
+function eliminarContacto(e){
+    if(e.target.parentElement.classList.contains('btn-borrar')){
+        const id=e.target.parentElement.getAttribute('data-id');
+        const respuesta=confirm('Estas seguro de eliminar?');
+        if(respuesta){
+            //crear la conexion
+            const xhr=new XMLHttpRequest();
+            //abrir la conecion
+            xhr.open('GET',`includes/modelos/modelo-contactos.php?id=${id}&accion=borrar`,true);
+
+            xhr.onload=function(){
+                if(this.status==200){//se ejecuto correctamente
+                    const resultado=JSON.parse(xhr.responseText);
+                    console.log(resultado);
+                }
+            }
+            xhr.send();
+        }
+        console.log(id);
+    }
 }
 function mostrarNotificacion(clase,mensaje){
     const notificacion=document.createElement('div');

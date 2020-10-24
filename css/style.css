@@ -35,6 +35,9 @@ html {
     font-size: 2rem;
     text-decoration: none;
     }
+    .btn:hover{
+        cursor: pointer;
+    }
     .btn-editar{
         color: var(--secundario);
     }

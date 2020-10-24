@@ -16,7 +16,7 @@
         <input type="text" name="" id="buscar" class="buscador" placeholder="Buscar Contacto">
         <p class="total-contactos"> <span>2 </span>Contactos</p>
         <div class="contenedor-tabla">
-            <table  class="listado-contactos">
+            <table  id="listado-contactos" class="listado-contactos">
                 <thead>
                     <tr>
                         <th>Nombre</th>
@@ -25,7 +25,7 @@
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody id="listado-contactos"> 
+                <tbody> 
                     <?php $contactos=obtenerContactos();
                         if($contactos->num_rows){
                             foreach($contactos as $contacto){ ?>
