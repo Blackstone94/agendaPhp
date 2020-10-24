@@ -33,7 +33,7 @@
         echo json_encode($respuesta);
     }
 
-    if($_GET['accion']=='borrar'){
+    if($_GET['accion']=='borrar'){ 
         $id = filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT);
         try{
             require_once('../funciones/bd.php');

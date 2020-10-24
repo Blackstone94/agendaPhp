@@ -108,10 +108,12 @@ function eliminarContacto(e){
             xhr.onload=function(){
                 if(this.status==200){//se ejecuto correctamente
                     const resultado=JSON.parse(xhr.responseText);
-                  //  const resultado=xhr.responseText;
-                    console.log("js "+resultado);
-                    e.target.parentElement.parentElement.parentElement.remove();   
-                    mostrarNotificacion('correcto',"Contacto borrado"); 
+                    if(resultado['respuesta']==='correcto'){
+                        e.target.parentElement.parentElement.parentElement.remove();   //eliminar del dom
+                        mostrarNotificacion('correcto',"Contacto borrado"); 
+                    }else{
+                        mostrarNotificacion('error','Ocurrio un error'); 
+                    }
                 }else{
                     mostrarNotificacion('error','Ocurrio un error');
                 }
