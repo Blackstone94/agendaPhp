@@ -4,7 +4,9 @@ addEventListener();
 
 function addEventListener(){
     formularioContactos.addEventListener('submit',validarFormulario);
-    listadoContactos.addEventListener('click',eliminarContacto);
+    if(listadoContactos){
+        listadoContactos.addEventListener('click',eliminarContacto);
+    }
 }
 function validarFormulario(e){
     e.preventDefault();

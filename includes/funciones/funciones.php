@@ -13,7 +13,7 @@
     function obtenerContacto($id){
         include_once 'bd.php';
         try{
-        return   $conn->query("SELECT id,nombre,empresa,telefono where id=$id");
+           return   $conn->query("SELECT id,nombre,empresa,telefono from CONTACTOS where id=$id");
         }catch (Exception $e){
             echo 'Error en php '.$e->getMessage();
             return false;
