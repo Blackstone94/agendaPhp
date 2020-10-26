@@ -25,15 +25,31 @@ function validarFormulario(e){
         infoContacto.append('empresa',empresa);
         infoContacto.append('telefono',telefono);
         infoContacto.append('accion',accion);
-
         if(accion==='crear'){
             //crear un nuevo contacto
             insertarBD(infoContacto);
         }else{
-            //editar un contacto
-
+            const id=document.querySelector('#id').value;
+            infoContacto.append('id',id);
+            actualizarRegistro(infoContacto);
         }
     }
+}
+function actualizarRegistro(datos){
+    //crear el objeto ajax
+    const xhr=new XMLHttpRequest();
+    //abrir la conexion
+    xhr.open('POST','includes/modelos/modelo-contactos.php',true);
+
+    //leer la respuesta
+    //enviar datos
+    xhr.onload = function(){
+        if(this.status===200){//ejecucion satisfactoria
+             const respuesta=JSON.parse(xhr.responseText);
+             console.log(respuesta);   
+        }
+    }
+    xhr.send(datos);
 }
 /*insertar a la base de datos via ajax */
 function insertarBD(datos){

@@ -20,9 +20,9 @@
         $textoBtn = ($contacto['telefono']) ? 'Guardar': 'Añadir';
         $accion =($contacto['telefono']) ? 'editar' : 'crear';
     ?>
-    <input type="hidden" id="accion" value=<?php $accion?>>
+    <input type="hidden" id="accion" value=<?php echo $accion?>>
     <?php if(isset($contacto['id'])){?>
-         <input type="hidden" id="accion" value=<?php $contacto['id']?>>
+         <input type="hidden" id="id" value=<?php echo $contacto['id']?>>
     <?php } ?>
     <input type="submit" value=<?php echo $textoBtn?>>
 </div>
