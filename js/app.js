@@ -45,8 +45,18 @@ function actualizarRegistro(datos){
     //enviar datos
     xhr.onload = function(){
         if(this.status===200){//ejecucion satisfactoria
+            console.log(xhr.responseText);
              const respuesta=JSON.parse(xhr.responseText);
-             console.log(respuesta);   
+             if(respuesta.respuesta==='correcto'){
+                 //mostrar notificacion correcta
+                 mostrarNotificacion('correcto','Contacto editado correctamente')
+             }else{
+                 //mostrar notificacion incorrecta
+                 mostrarNotificacion('incorrecto','Ocurrio un error');
+             }
+             setTimeout(() => {
+                 window.location.href = 'index.php';
+             }, 3000);
         }
     }
     xhr.send(datos);

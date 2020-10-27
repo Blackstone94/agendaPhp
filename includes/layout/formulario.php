@@ -12,7 +12,7 @@
     <div class="campo">
         <label for="nombre">Telefono:</label>
         <input type="tel" placeholder="Numero de telefono" id="tel"
-        value=<?php echo ($contacto['empresa']) ? $contacto['empresa']: ''?>>
+        value=<?php echo ($contacto['telefono']) ? $contacto['telefono']: ''?>>
     </div>
 </div>
 <div class="campo enviar">
