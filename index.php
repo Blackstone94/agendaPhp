@@ -14,7 +14,7 @@
     <div class="contactos">
         <h2>Contactos</h2>
         <input type="text" name="" id="buscar" class="buscador" placeholder="Buscar Contacto">
-        <p class="total-contactos"> <span>2 </span>Contactos</p>
+        <p class="total-contactos"> <span>2</span>     Contactos</p>
         <div class="contenedor-tabla">
             <table  id="listado-contactos" class="listado-contactos">
                 <thead>

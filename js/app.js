@@ -8,7 +8,10 @@ function addEventListener(){
     if(listadoContactos){
         listadoContactos.addEventListener('click',eliminarContacto);
     }
-    inputBuscar.addEventListener('input',buscarContactos);
+    if(inputBuscar){
+        inputBuscar.addEventListener('input',buscarContactos);
+    }
+    numeroContactos();
 }
 function validarFormulario(e){
     e.preventDefault();
@@ -119,6 +122,7 @@ function insertarBD(datos){
             mostrarNotificacion('correcto','contacto creado correctamente');
 
             document.querySelector('form').reset();
+            numeroContactos();
         }
     }
     //enviar los datos
@@ -141,6 +145,7 @@ function eliminarContacto(e){
                     if(resultado['respuesta']==='correcto'){
                         e.target.parentElement.parentElement.parentElement.remove();   //eliminar del dom
                         mostrarNotificacion('correcto',"Contacto borrado"); 
+                        numeroContactos();
                     }else{
                         mostrarNotificacion('error','Ocurrio un error'); 
                     }
@@ -159,10 +164,13 @@ function buscarContactos(e){
 
     registros.forEach(registro=>{
         registro.style.display='none';
-        if(registro.childNodes[1].textContent.replace(/\s/g," ").search(expresion) !=-1){
+        if(registro.childNodes[1].textContent.replace(/\s/g," ").search(expresion) != -1 
+        || registro.childNodes[3].textContent.replace(/\s/g," ").search(expresion) != -1){
             registro.style.display='table-row';
         }
+        numeroContactos();
     });
+
 }
 function mostrarNotificacion(clase,mensaje){
     const notificacion=document.createElement('div');
@@ -179,4 +187,16 @@ function mostrarNotificacion(clase,mensaje){
             },500);
         },3000);
     },100);
+}
+function numeroContactos(){
+    const totalContactos=document.querySelectorAll('tbody tr'),
+    contenedorNumero =document.querySelector('.total-contactos span');
+
+    let total=0;
+    totalContactos.forEach(contacto=>{
+        if(contacto.style.display === '' || contacto.style.display==='table-row'){
+            total++;
+        }
+    });
+    contenedorNumero.textContent=total;
 }
