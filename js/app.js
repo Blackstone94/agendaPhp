@@ -1,5 +1,6 @@
 const formularioContactos = document.querySelector('#contacto');
 const listadoContactos = document.querySelector('#listado-contactos tbody');
+const inputBuscar = document.querySelector('#buscar');
 addEventListener();
 
 function addEventListener(){
@@ -7,6 +8,7 @@ function addEventListener(){
     if(listadoContactos){
         listadoContactos.addEventListener('click',eliminarContacto);
     }
+    inputBuscar.addEventListener('input',buscarContactos);
 }
 function validarFormulario(e){
     e.preventDefault();
@@ -150,6 +152,17 @@ function eliminarContacto(e){
         }
         console.log(id);
     }
+}
+function buscarContactos(e){
+    const expresion =new RegExp(e.target.value,"i");//expresion regular, valor de entrada, ignora mayus
+    registros = document.querySelectorAll('tbody tr');
+
+    registros.forEach(registro=>{
+        registro.style.display='none';
+        if(registro.childNodes[1].textContent.replace(/\s/g," ").search(expresion) !=-1){
+            registro.style.display='table-row';
+        }
+    });
 }
 function mostrarNotificacion(clase,mensaje){
     const notificacion=document.createElement('div');
